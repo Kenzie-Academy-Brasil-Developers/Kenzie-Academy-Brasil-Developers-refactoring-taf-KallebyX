@@ -1,19 +1,19 @@
 // Implemente aqui as funções
-function Abs(abs){
+function absTest(abs){
     if(abs >= 41){
         return true
     }
     return false
 }
 
-function Swim(swimDistance, swimTime, diveTime){
-    if((swimDistance >= 100 && swimTime >= 60) || diveTime >= 30) {
+function swimTest(swimDistance, swimTime, diveTime){
+    if((swimDistance >= 100 && swimTime <= 60) || diveTime <= 30) {
         return true
     }
     return false
 }
 
-function Height(gender, height){
+function heightTest(gender, height){
     if(gender === "male" && height >= 1.70){
         return true
     }
@@ -23,32 +23,36 @@ function Height(gender, height){
     return false
 }
 
-function BarTest(gender, barReps, barSeconds){
-    if((gender === "male" && barReps >= 6) || barSeconds <= 15){
+function barTest(gender, barReps, barSeconds){
+    if((gender === "male" && barReps >= 6) || (gender === "male" && barSeconds >= 15)){
         return true
     }
-    if((gender === "female" && barReps >= 5) || barSeconds <= 12){
+    if((gender === "female" && barReps >= 5) || (gender === "female" && barSeconds >= 12)){
         return true
     }
     return false
 }
 
-function Run(gender, runDistance, runTime){
-    if((gender === "male" && runDistance >= 3000 && runTime >= 720) || runDistance >= 5000 && runTime <= 1200) {
-        return true
+function runTest(gender, runDistance, runTime){
+    if(gender === "male") {
+        if((runDistance >= 3000 && runTime <= 720) || (runDistance >= 5000 && runTime <= 1200)) {
+            return true
+        }
     }
-    if((gender === "female" && runDistance >= 4000 && runTime >= 900) || runDistance >= 6000 && runTime <= 1320) {
-        return true
+    if(gender === "female") {
+        if((runDistance >= 4000 && runTime <= 900) || (runDistance >= 6000 && runTime <= 1320)) {
+            return true
+        }
     }
     return false
 }
 
 function areCandidateResultsValid(gender, height, barReps, barSeconds, abs, runDistance, runTime, swimDistance, swimTime, diveTime) {
-    let absResult = Abs(abs)
-    let swimResult = Swim(swimDistance, swimTime, diveTime)
-    let heigtResult = Height(gender, height)
-    let barResult = BarTest(gender, barReps, barSeconds)
-    let runResult = Run(gender, runDistance, runTime)
+    let absResult = absTest(abs)
+    let swimResult = swimTest(swimDistance, swimTime, diveTime)
+    let heigtResult = heightTest(gender, height)
+    let barResult = barTest(gender, barReps, barSeconds)
+    let runResult = runTest(gender, runDistance, runTime)
     if(absResult && swimResult && heigtResult && barResult && runResult){
         return true
     }
@@ -74,7 +78,6 @@ const areCandidateValid = areCandidateResultsValid(
 // Chame aqui a função que mostra o resultado no console
 
 function showMessage(message){
-    return message[message, "MESSAGE"]
+    console.log(message.toString().toUpperCase())
 }
-
 showMessage(areCandidateValid);
